@@ -43,6 +43,9 @@ class Maze():
                                  str(width) + 'x' + str(height) + '.')
         self.cell_dict = cell_dict.copy()
 
+    def __str__(self):
+        return "Maze: " + ', '.join([str(coord) + ' -> '+ str(cell) for coord, cell in self.cell_dict.items()])
+
     def get_format(self):
         return (self.width, self.height)
 
