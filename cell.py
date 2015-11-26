@@ -9,6 +9,9 @@ class Cell():
         """
         self.walls = walls.copy()
 
+    def __str__(self):
+        return "Cell:" + str(self.walls)
+
     def is_compatible(self, other_cell, direction):
         """
         Test if a cell is compatible with another cell. The direction
@@ -16,6 +19,7 @@ class Cell():
         cell.
         """ 
         return (direction in self.walls) == (opposite_direction[direction] in other_cell.walls)
+
 
 class TestCellMethods(unittest.TestCase):
     def test_is_compatible(self):
