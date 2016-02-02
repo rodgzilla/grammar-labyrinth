@@ -7,10 +7,18 @@ class Cell():
         """
         Initialize a set using a set of walls.
         """
-        self.walls = walls.copy()
+        self._walls = frozenset(walls)
 
     def __str__(self):
-        return "Cell:" + str(self.walls)
+        return "Cell:" + str(self._walls)
+
+    def __eq__(self, other):
+        if not isinstance(other, Cell):
+            return False
+        return self._walls == other._walls
+
+    def __hash__(self):
+        return hash(self._walls)
 
     def is_compatible(self, other_cell, direction):
         """
@@ -18,7 +26,7 @@ class Cell():
         argument indicates the wall of self to which we glue the other
         cell.
         """ 
-        return (direction in self.walls) == (opposite_direction[direction] in other_cell.walls)
+        return (direction in self._walls) == (opposite_direction[direction] in other_cell._walls)
 
 
 class TestCellMethods(unittest.TestCase):

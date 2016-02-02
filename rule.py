@@ -4,7 +4,6 @@ from cell import Cell
 from directions import Directions
 from maze import Maze
 
-
 class Rule():
     def __init__(self, cell, rewrittings):
         """
@@ -94,4 +93,11 @@ class TestRuleMethods(unittest.TestCase):
         self.assertTrue(rule.apply_rule() == maze)
         
 if __name__ == '__main__':
+    c1 = Cell({Directions.N})
+    c2 = Cell({Directions.S})
+    c3 = Cell({Directions.N, Directions.E})
+    maze1 = Maze(2, 1, {(0, 0): c2, (1, 0): c1})
+    maze2 = Maze(2, 1, {(0, 0): c1, (1, 0): c2})
+    rule = Rule(c3, [(50, maze1), (50, maze2)])
+    print(rule)
     unittest.main()
