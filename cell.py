@@ -28,6 +28,24 @@ class Cell():
         """ 
         return (direction in self._walls) == (opposite_direction[direction] in other_cell._walls)
 
+    def pretty_print(self, draw_north = True, draw_west = True):
+        res = [[' '] * 5 for _ in range(3)]
+
+        if draw_north and Directions.N in self._walls:
+            for i in range(5):
+                res[0][i] = '#'
+
+        if draw_west and Directions.W in self._walls:
+            res[1][0] = '#'
+
+        if Directions.E in self._walls:
+            res[1][-1] = '#'
+
+        if Directions.S in self._walls:
+            for i in range(5):
+                res[-1][i] = '#'
+
+        return [''.join(line) for line in res]
 
 class TestCellMethods(unittest.TestCase):
     def test_is_compatible(self):
