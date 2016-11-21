@@ -15,8 +15,6 @@ class Grammar():
         
     def __str__(self):
         return '\n'.join([str(rule) for rule in self._rule_list])
-        # for rule in self._rule_list:
-        #     print(rule)
 
     def iterate(self, maze):
         pass
@@ -45,7 +43,6 @@ class TestGrammarMethods(unittest.TestCase):
             grammar = Grammar(rules)
         except ValueError:
             self.fail("This grammar should be valid but raised an exception")
-        print(grammar)
 
 
 if __name__ == '__main__':
