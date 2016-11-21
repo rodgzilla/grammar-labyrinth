@@ -37,6 +37,9 @@ class Rule():
         
         self._cell = cell
 
+    def __str__(self):
+        return 'Cell: ' + str(self._cell) + ' ' + str(self._rewritting_rules)
+
     def get_rule_format(self):
         return self._rewritting_rules[0][1].get_format()
 
