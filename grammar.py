@@ -26,11 +26,17 @@ class Grammar():
         self._rule_height = rule_format[1]
 
     def __str__(self):
-        s = 'Grammar: ' + str(self._rule_dict)
-        return s
-        # return '\n'.join([str(rule) for rule in self._rule_list])
+        """
+        Return a string representation of this grammar.
+        """
+        return 'Grammar: ' + str(self._rule_dict)
 
     def iterate(self, maze):
+        """
+        Apply the grammar to the maze. This means that each cell of the
+        maze is replaced by another maze according to the
+        corresponding rule of the grammar.
+        """
         width, height = maze.get_format()
         new_width = width * self._rule_width
         new_height = height * self._rule_height

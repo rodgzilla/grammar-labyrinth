@@ -44,12 +44,19 @@ class Maze():
         self.cell_dict = cell_dict.copy()
 
     def __str__(self):
+        """
+        Return a string representation of this maze. For an ascii art 
+        representation, call pretty_print().
+        """
         return "Maze: " + \
                ', '.join([str(coord) + \
                ' -> '+ \
                str(cell) for coord, cell in self.cell_dict.items()])
 
     def _pretty_print_repr(self):
+        """
+        Build an ascii art representation of this maze.
+        """
         result = []
         for i in range(self.width):
             lines = [[] for _ in range(3 if i == 0 else 2)]
@@ -64,12 +71,21 @@ class Maze():
         return('\n'.join(result))
 
     def get_cell(self, i, j):
+        """
+        Access a single cell of the maze.
+        """
         return self.cell_dict[(i, j)]
       
     def pretty_print(self):
+        """
+        Print the ascii representation of the maze.
+        """
         print(self._pretty_print_repr())
        
     def get_format(self):
+        """
+        Return the width and the height of the maze.
+        """
         return (self.width, self.height)
 
 class TestMazeMethods(unittest.TestCase):

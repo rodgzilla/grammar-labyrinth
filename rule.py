@@ -38,15 +38,28 @@ class Rule():
         self._cell = cell
 
     def __str__(self):
+        """
+        Return a string representation of the rule
+        """
         return 'Cell: ' + str(self._cell) + ' ' + str(self._rewritting_rules)
 
     def get_rule_format(self):
+        """
+        Return the width and the height of the rewrittings.
+        """
         return self._rewritting_rules[0][1].get_format()
 
     def get_cell(self):
+        """
+        Return the cell that will be rewritten by this rule.
+        """
         return self._cell
 
     def apply_rule(self):
+        """
+        Apply the rule, i.e. generate a random number between 1 and 100
+        and return the corresponding maze rewritting.
+        """
         random_int = random.randint(1, 100)
 
         for ((min_proba, max_proba), maze) in self._rewritting_rules:

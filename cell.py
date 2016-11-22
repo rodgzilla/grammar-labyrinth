@@ -10,9 +10,15 @@ class Cell():
         self._walls = frozenset(walls)
 
     def __str__(self):
+        """
+        Returns the string representation of the cell.
+        """
         return "Cell:" + str(self._walls)
 
     def __eq__(self, other):
+        """
+        Test the equality between self and other.
+        """
         if not isinstance(other, Cell):
             return False
         return self._walls == other._walls
@@ -55,6 +61,23 @@ class Cell():
         return north_coord, south_coord, west_coord, east_coord
 
     def pretty_print_repr(self, draw_north = True, draw_west = True):
+        """Return a graphical representation of this cell. By default, a cell
+        is represented by a 3x5 ascii art. For example, a cell
+        containing walls north and west would be represented like
+        this:
+
+        #####
+        #
+        #
+
+        The two parameters are used to build a pretty print of a maze
+        in which we don't want to draw the same wall multiple
+        times. The representation of the above example with draw_north
+        = False would be:
+
+        #
+        #
+        """
         res = [[' '] * (5 if draw_west else 4) for _ in range(3 if draw_north else 2)]
         north, south, west, east = self._compute_coords_pretty_print(draw_north, draw_west)
 
