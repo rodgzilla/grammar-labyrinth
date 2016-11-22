@@ -104,10 +104,16 @@ class TestMazeMethods(unittest.TestCase):
         m = Maze(1, 2, {(0,0) : Cell({}), (0,1) : Cell({})})
         self.assertEqual(m.get_format(), (1, 2))
 
+    def test_pretty_print(self):
+        #TODO
+        pass
+
 if __name__ == '__main__':
     c1 = Cell({Directions.N})
     c2 = Cell({Directions.S})
     c3 = Cell({Directions.N, Directions.S, Directions.W, Directions.E})
+    c4 = Cell({Directions.N, Directions.W, Directions.E})
+    c5 = Cell({Directions.S, Directions.W, Directions.E})
     # m1 = Maze(2, 1, {(0, 0): c2, (1, 0): c1})
     # m1.pretty_print()
     m2 = Maze(3, 3, 
@@ -116,10 +122,10 @@ if __name__ == '__main__':
                   (0,1) : c3,
                   (0,2) : c3,
                   (1,0) : c3,
-                  (1,1) : c3,
+                  (1,1) : c4,
                   (1,2) : c3,
                   (2,0) : c3,
-                  (2,1) : c3,
+                  (2,1) : c5,
                   (2,2) : c3
               }
           )
