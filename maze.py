@@ -44,8 +44,28 @@ class Maze():
         self.cell_dict = cell_dict.copy()
 
     def __str__(self):
-        return "Maze: " + ', '.join([str(coord) + ' -> '+ str(cell) for coord, cell in self.cell_dict.items()])
+        return "Maze: " + \
+               ', '.join([str(coord) + \
+               ' -> '+ \
+               str(cell) for coord, cell in self.cell_dict.items()])
 
+    def _pretty_print_repr(self):
+        result = []
+        for i in range(self.width):
+            lines = [[] for _ in range(3 if i == 0 else 2)]
+            for j in range(self.height):
+                cell_pp = self.cell_dict[(i, j)].pretty_print_repr(i == 0, j == 0)
+
+                for line_repr, cell_repr in zip(lines, cell_pp):
+                    line_repr.append(cell_repr)
+
+            for line in lines:
+                result.append(''.join(line))
+        return('\n'.join(result))
+         
+    def pretty_print(self):
+        print(self._pretty_print_repr())
+       
     def get_format(self):
         return (self.width, self.height)
 
@@ -83,3 +103,25 @@ class TestMazeMethods(unittest.TestCase):
     def test_get_format(self):
         m = Maze(1, 2, {(0,0) : Cell({}), (0,1) : Cell({})})
         self.assertEqual(m.get_format(), (1, 2))
+
+if __name__ == '__main__':
+    c1 = Cell({Directions.N})
+    c2 = Cell({Directions.S})
+    c3 = Cell({Directions.N, Directions.S, Directions.W, Directions.E})
+    # m1 = Maze(2, 1, {(0, 0): c2, (1, 0): c1})
+    # m1.pretty_print()
+    m2 = Maze(3, 3, 
+              {
+                  (0,0) : c3,
+                  (0,1) : c3,
+                  (0,2) : c3,
+                  (1,0) : c3,
+                  (1,1) : c3,
+                  (1,2) : c3,
+                  (2,0) : c3,
+                  (2,1) : c3,
+                  (2,2) : c3
+              }
+          )
+    m2.pretty_print()
+

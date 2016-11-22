@@ -28,22 +28,51 @@ class Cell():
         """ 
         return (direction in self._walls) == (opposite_direction[direction] in other_cell._walls)
 
-    def pretty_print(self, draw_north = True, draw_west = True):
-        res = [[' '] * 5 for _ in range(3)]
+    def _compute_coords_pretty_print(self, draw_north, draw_west):
+        if draw_north:
+            if draw_west:
+                north_coord = [(0, i) for i in range(5)]
+                south_coord = [(-1, i) for i in range(5)]
+                west_coord = [(i, 0) for i in range(3)]
+                east_coord = [(i, -1) for i in range(3)]
+            else:
+                north_coord = [(0, i) for i in range(4)]
+                south_coord = [(-1, i) for i in range(4)]
+                west_coord = []
+                east_coord = [(i, -1) for i in range(3)]
+        else:
+            if draw_west:
+                north_coord = []
+                south_coord = [(-1, i) for i in range(5)]
+                west_coord = [(i, 0) for i in range(2)]
+                east_coord = [(i, -1) for i in range(2)]
+            else:
+                north_coord = []
+                south_coord = [(-1, i) for i in range(4)]
+                west_coord = []
+                east_coord = [(i, -1) for i in range(2)]
 
-        if draw_north and Directions.N in self._walls:
-            for i in range(5):
-                res[0][i] = '#'
+        return north_coord, south_coord, west_coord, east_coord
 
-        if draw_west and Directions.W in self._walls:
-            res[1][0] = '#'
+    def pretty_print_repr(self, draw_north = True, draw_west = True):
+        res = [[' '] * (5 if draw_west else 4) for _ in range(3 if draw_north else 2)]
+        north, south, west, east = self._compute_coords_pretty_print(draw_north, draw_west)
 
-        if Directions.E in self._walls:
-            res[1][-1] = '#'
+        if Directions.N in self._walls:
+            for x, y in north:
+                res[x][y] = '#'
 
         if Directions.S in self._walls:
-            for i in range(5):
-                res[-1][i] = '#'
+            for x, y in south:
+                res[x][y] = '#'
+
+        if  Directions.W in self._walls:
+            for x, y in west:
+                res[x][y] = '#'
+
+        if Directions.E in self._walls:
+            for x, y in east:
+                res[x][y] = '#'
 
         return [''.join(line) for line in res]
 
