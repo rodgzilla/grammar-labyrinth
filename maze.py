@@ -62,7 +62,10 @@ class Maze():
             for line in lines:
                 result.append(''.join(line))
         return('\n'.join(result))
-         
+
+    def get_cell(self, i, j):
+        return self.cell_dict[(i, j)]
+      
     def pretty_print(self):
         print(self._pretty_print_repr())
        
